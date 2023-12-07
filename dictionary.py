@@ -22,7 +22,7 @@ def clean_files():
                 lines=f.readlines()
                 for line in lines:
                     if line.strip():
-                        with open(f'Rhymes/dictionary_no_space/{file}.txt','a',encoding="utf-8") as new_file:
+                        with open(f'Rhymes/dictionary_no_space/{file}','a',encoding="utf-8") as new_file:
                             new_file.write(line)
 
 """
@@ -111,6 +111,6 @@ def create_base_dictionary():
     numbers_of_letters=[]
 
 
-create_base_dictionary()
-
+#create_base_dictionary()
+clean_files()
 
