@@ -253,8 +253,8 @@ def get_rhymes():
 
 
 if __name__ == '__main__':
-    words_dictionary = load_dictionary()
-    ending_dictionary = get_ending_dictionary(words_dictionary)
-    indexed_dictionary = get_indexed_dictionary(words_dictionary)
+    words_dictionary = algorithm.load_dictionary()
+    ending_dictionary = algorithm.get_ending_dictionary(words_dictionary)
+    indexed_dictionary = algorithm.get_indexed_dictionary(words_dictionary)
     FlaskUI(app=app, server="flask", port=5000).run()
 
