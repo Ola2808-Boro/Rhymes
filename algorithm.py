@@ -213,3 +213,5 @@ class Algorithm():
                     if  self.get_score(word, rhyme) >= quality]
         sorted_scoreboard = sorted(scoreboard, key=lambda x: (-x["quality"], x["word"]))
         return sorted_scoreboard
+    
+

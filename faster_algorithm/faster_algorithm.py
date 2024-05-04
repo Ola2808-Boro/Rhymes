@@ -5,7 +5,10 @@ import matplotlib.pyplot as plt
 import numpy as np
 import math
 import os
+import logging
 
+logging.basicConfig(level=logging.INFO,filename='algorithm.log', filemode='w', format='%(name)s - %(levelname)s - %(message)s')
+BASE_DIR='C:/Users/olkab/Desktop/Project Rhyme/Rhymes/faster_algorithm'
 my_dictionary = []
 directory_path = 'dictionary_no_space'
 for filename in os.listdir(directory_path):
@@ -16,7 +19,7 @@ for filename in os.listdir(directory_path):
             my_dictionary.append(line.strip())
 
 
-file = open("indexed_dictionary.json", "r")
+file = open(f"{BASE_DIR}/indexed_dictionary.json", "r")
 indexed_dictionary = json.load(file)
 
 def get_syllables_count(word):
@@ -159,7 +162,10 @@ def get_score(original_word, checked_word):
                                                                                                          'ał').replace(
                 'eu', 'eł')
 
+            logging.info(f'vowel_pattern: {vowel_pattern}, original_word_beginning {original_word_beginning}')
             match = re.search(vowel_pattern, original_word_beginning)
+            if not match:
+                return -1
             max_letters = len(original_word_beginning[match.start():])
 
             same_letters = 0
@@ -184,6 +190,6 @@ def get_scoreboard(word, syllables_count=-1):
     return sorted_scoreboard
 
 
-while True:
-    word = input("Podaj słowo: ")
-    print(get_scoreboard(word))
+# while True:
+#     word = input("Podaj słowo: ")
+#     print(get_scoreboard(word))
