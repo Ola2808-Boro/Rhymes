@@ -6,10 +6,14 @@ from pathlib import Path
 import os
 
 
-"""
-A function for removing empty lines from files containing words in Polish.
-"""
+
 def clean_files():
+    """
+    Checks for and creates a directory to store cleaned files if it doesn't exist already. 
+    Iterates through files in the 'dictionary' directory, removes empty lines, and writes 
+    non-empty lines to corresponding files in the 'dictionary_no_space' directory.
+    """
+
     if Path('Rhymes/dictionary_no_space').is_dir():
         print('Dictionary folder already exists ')
     else:
@@ -25,10 +29,15 @@ def clean_files():
                         with open(f'Rhymes/dictionary_no_space/{file}','a',encoding="utf-8") as new_file:
                             new_file.write(line)
 
-"""
-A function to create a txt file for each word in Polish, which contains rhymes for a given word.
-"""
 def create_rhymes_dictionary(all_letters):
+    """
+    Iterates through cleaned files in the 'dictionary_no_space' directory, extracts each word, 
+    fetches rhymes from an online source, and writes them into respective files in the 'rhymes' directory.
+    
+    Args:
+        all_letters (list): List of letters corresponding to directories for different syllable counts.
+    """
+      
     idx=0
     for file in os.listdir("Rhymes/dictionary_no_space/dictionary_no_space"):
         print(file)
@@ -56,12 +65,12 @@ def create_rhymes_dictionary(all_letters):
 
 
 
-"""
-A function that creates txt files with all possible words in Polish. 
-Then it calls the clean_files() function, which removes e.g. empty lines from these files. 
-After this stage, it calls function create_rhymes_dictionary() to create a file for each word containing words that rhyme with it.
-"""
+
 def create_base_dictionary():
+    """
+    Scrapes Polish words from an online dictionary, organizes them into files based on letter and syllable count,
+    cleans the files, and then creates files containing rhymes for each word.
+    """
     if Path('Rhymes/dictionary').is_dir():
         print('Dictionary folder already exists ')
     else:
@@ -107,10 +116,9 @@ def create_base_dictionary():
                         f.write(p.get_text().replace(" ",""))
     
     clean_files()
-    #create_rhymes_dictionary(all_letters=all_letters)
+    create_rhymes_dictionary(all_letters=all_letters)
     numbers_of_letters=[]
 
 
-#create_base_dictionary()
-clean_files()
+create_base_dictionary()
 
