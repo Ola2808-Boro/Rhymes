@@ -59,7 +59,7 @@ def processing_data(df:pd.DataFrame):
     x = np.concatenate((pad_word1, pad_word2), axis=-1)
     y = df['score'].values
 
-    return tokenizer,x,y
+    return tokenizer,x,y,max_sequence_length
 
 def split_data(x,y):
     """
@@ -77,7 +77,7 @@ def split_data(x,y):
     print(f'Train dataset {len(x_train)} validation dataset {len(x_val)}')
     return x_train, x_val, y_train, y_val
 
-def build_models(tokenizer):
+def build_models(tokenizer,max_sequence_length):
     """
     Builds and compiles multiple models for training.
     
@@ -150,7 +150,7 @@ def predict_function(model,word_1, word_2,tokenizer):
     result=np.round(raw_result)
     return result,raw_result
 
-def training(model_name:str,model,epochs:int,optimizer,batch_size:int,optimizer_name:str,x_train,y_train):
+def training(model_name:str,model,epochs:int,optimizer,batch_size:int,optimizer_name:str,x_train,y_train,x_val,y_val):
     
     """
     Trains a model and saves its weights.
@@ -216,9 +216,9 @@ def train(settings):
     """
    
     df=read_data(path=PATH)
-    tokenizer,x,y=processing_data(df=df)
+    tokenizer,x,y,max_sequence_length=processing_data(df=df)
     x_train, x_val, y_train, y_val=split_data(x=x,y=y)
-    model1,model2,model3=build_models(tokenizer=tokenizer)
+    model1,model2,model3=build_models(tokenizer=tokenizer,max_sequence_length=max_sequence_length)
     settings=[{
     'model':model1,
     'model_name':'model1',
@@ -342,7 +342,9 @@ def train(settings):
                          batch_size=batch_size,
                          optimizer_name=optimizer_name,
                          x_train=x_train,
-                         y_train=y_train)
+                         y_train=y_train,
+                         x_val=x_val,
+                         y_val=y_val)
         plot_save_charts(model_setting=settings[i],history=history)
         with open(f'models/{model_name}/model_result_{optimizer_name}__{batch_size}.json','w') as f:
             json.dump(history.history,f,indent=6)
