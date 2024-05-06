@@ -5,9 +5,7 @@
 # Neural approach for rhyming word recommendations
 
 The research paper deals with the problem of rhyme generation. The project concerns words in the Polish language.
-Two methods have been proposed to determine whether two words rhyme. A proprietary algorithm was created
-and three types of neural networks were trained. The efficiency, the way each of the discussed methods works, was
-compared
+Two methods have been proposed to determine whether two words rhyme. We proposed our own algorithm in order to score rhyming words. Moreover, three types of neural networks were trained to imitate the algorithm. The efficiency, the way each of the discussed methods works, was compared.
 
 
 ## Features
