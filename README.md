@@ -15,7 +15,7 @@ Ability to generate rhymes to the given word. You can adjust the number of retur
 
 ## Tech Stack
 
-Tensorflow, Keras
+Tensorflow, Keras, Angular, Flask
 
 
 ## Demo
