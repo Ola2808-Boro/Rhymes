@@ -29,7 +29,7 @@ https://rhymesgenerator.eu.pythonanywhere.com/
 
 ## Results
 
-|Metrics| Model 1  | M0del 2 | 
+|Metrics| Model 1  | Model 2 | 
 | ------------- | ------------- | ------------- |
 | loss  |0.004  | 0.016  |
 | MAE  |0.04  | 0.10  |
